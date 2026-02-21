@@ -1,0 +1,9 @@
+{% extends "cinema_site/base.html" %}
+{% block content %}
+ <p>Добавление нового сериала:</p>
+ <form action="{% url 'cinema_site:new_serial' %}" method='post'>
+ {% csrf_token %}
+ {{ form.as_p }}
+ <button name="submit">Добавить сериал</button>
+ </form>
+{% endblock content %}

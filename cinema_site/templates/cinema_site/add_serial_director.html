@@ -1,0 +1,31 @@
+{% extends "cinema_site/base.html" %}
+{% block content %}
+ {% if query %}
+    <h5>
+      {% with directors.count as total_results %}
+	    Найдено: {{ total_results }} result {{ total_results|pluralize }}
+      {% endwith %}
+    </h5>
+    {% for director in directors %}  
+      <h5><a href="{% url 'cinema_site:director' director.id %}">{{ director.last_name }} {{ director.first_name }}</a></h5>
+      <li>
+      <strong>{{ director.last_name }} {{ director.first_name }}</strong> (ID: {{ director.id}})
+      {% if director.description %}
+       <p>{{ director.description }}</p>
+      {% endif %}
+      <form method="post" action="{% url 'cinema_site:add_serial_director' serial.id %}" style="display: inline;">
+        {% csrf_token %}
+        <input type="hidden" name="director_id" value="{{ director.id}}">
+        <input type="submit"><strong>Выбрать этого режиссера</strong>
+      </form>
+      </li>
+    {% endfor %}
+  {% endif %}
+    <h5>Введите фамилию режиссера</h5>
+    <form action="." method="get">
+      {{ form.as_p }}
+      <input type="submit" value="Искать">
+    </form>
+    <p><a href="{% url 'cinema_site:add_serial_director' serial.id %}">Искать заново</a></p>
+    <p><a href="{% url 'cinema_site:directors' %}">Создать страницу с режиссером</a></p>      
+{% endblock %}

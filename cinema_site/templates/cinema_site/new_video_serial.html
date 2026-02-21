@@ -1,0 +1,11 @@
+{% extends "cinema_site/base.html" %}
+{% block content %}
+ <p><a href="{% url 'cinema_site:serial' serial.id %}">{{ serial.name }}</a></p>
+ <p>Максимальное количество загружаемых видео: 2</p>
+  <p>Добавьте видео:</p>
+ <form action="{% url 'cinema_site:new_video_serial' serial.id %}" method='post' enctype="multipart/form-data">
+ {% csrf_token %}
+ {{ form.as_p }}
+ <button name='submit'>Добавить видео</button>
+ </form>
+{% endblock content %}

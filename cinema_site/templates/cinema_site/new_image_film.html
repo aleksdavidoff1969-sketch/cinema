@@ -1,0 +1,11 @@
+{% extends "cinema_site/base.html" %}
+{% block content %}
+ <p><a href="{% url 'cinema_site:film' film.id %}">{{ film.name }}</a></p>
+ <p>Максимальное количество загружаемых изображений: 3</p>
+  <p>Добавьте изображение:</p>
+ <form action="{% url 'cinema_site:new_image_film' film.id %}" method='post' enctype="multipart/form-data">
+ {% csrf_token %}
+ {{ form.as_p }}
+ <button name='submit'>Добавить изображение</button>
+ </form>
+{% endblock content %}

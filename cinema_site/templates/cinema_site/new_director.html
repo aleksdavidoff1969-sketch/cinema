@@ -1,0 +1,9 @@
+{% extends "cinema_site/base.html" %}
+{% block content %}
+ <p>Добавление нового фильма:</p>
+ <form action="{% url 'cinema_site:new_director' %}" method='post'>
+ {% csrf_token %}
+ {{ form.as_p }}
+ <button name="submit">Добавить режиссера</button>
+ </form>
+{% endblock content %}

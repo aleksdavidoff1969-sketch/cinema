@@ -1,0 +1,78 @@
+{% extends "cinema_site/base.html" %}
+{% load static %}
+{% block content %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap/min/css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+{% endblock %}
+  <h5>
+    Поиск режиссера по фамилии
+  </h5>
+  {% if query %}
+    <h5>
+      {% with results.count as total_results %}
+	    Найдено: {{ total_results }} 
+      {% endwith %}
+    </h5>
+    {% for director in results %}
+      <h5><a href="{% url 'cinema_site:director' director.id %}">  {{ director.last_name }} {{ director.first_name }}</a></h5>
+    {% empty %}
+      <p>Режиссер с такой фамилией не найден</p>
+    {% endfor %}
+    <p><a href="{% url 'cinema_site:directors' %}">Искать заново</a></p>
+  {% else %}
+    <h5>Введите фамилию режиссера</h5>
+    <form action="." method="get">
+      {{ form.as_p }}
+      <input type="submit" value="Искать">
+    </form>
+  {% endif %}
+      <div class="waviy">
+    <span style="--i:1">С</span>
+    <span style="--i:2">П</span>
+    <span style="--i:3">И</span>
+    <span style="--i:4">С</span>
+    <span style="--i:5">О</span>
+    <span style="--i:6">К</span>
+    <span style="--i:7"> </span>
+    <span style="--i:8">Р</span>
+    <span style="--i:9">Е</span>
+    <span style="--i:10">Ж</span>
+    <span style="--i:11">И</span>
+    <span style="--i:12">С</span>
+    <span style="--i:13">С</span>
+    <span style="--i:14">Е</span>
+    <span style="--i:15">Р</span>
+    <span style="--i:16">О</span>
+    <span style="--i:17">В</span>
+  </div>
+  {% for director in directors %}
+    <div class="animate__animated animate__fadeInUp" style="animation-delay: {{forloop.counter}}s;">
+    <li>
+      <a href="{% url 'cinema_site:director' director.id %}">
+      {{ director.last_name }} {{ director.first_name}}, информация о режиссере</a>
+    </li>
+    </div>
+  {% empty %}
+    <li>Информация о режиссерах отсутствует</li>
+  {% endfor %}
+  <p>
+    <a href="{% url 'cinema_site:new_director' %}">Дополнить список режиссеров</a>
+  </p>
+    <div class="pagination">
+    <span class="step-slinks">
+      {% if directors.has_previous %}
+        <a href="?page=1">&laquo; первая </a>
+        <a href="?page={{ directors.previous_page_number}}"> предыдущая </a>
+      {% endif %}
+      <span class="current">
+        Страница {{ directors.number }} из {{ directors.paginator.num_pages }}
+      </span>
+      {% if directors.has_next %}
+        <a href="?page={{ directors.next_page_number }}"> следующая </a>
+        <a href="?page={{ directors.paginator.num_pages}}"> последняя &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+  {% endblock content %}

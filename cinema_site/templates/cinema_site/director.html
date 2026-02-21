@@ -1,0 +1,52 @@
+{% extends "cinema_site/base.html" %}
+{% block content %}
+  <h5>Информация о режиссере</h5>
+  <main class="container px-6 align-items-center"></main>
+    <div class="row gx-5">
+      <div class="col-4 text-center align-items-center p-3 border bg-primary">
+        {% if not image %}
+          <a href="{% url 'cinema_site:new_image_director' director.id %}" class="btn btn-danger badge">Добавить фото режиссера</a>
+        {% else %} 
+          {% for im in image %}
+            <p>Фото режиссера</p>
+            <p ><img src="{{im.image.url}}" class="img-fluid"></p>
+            <a href="{% url 'cinema_site:delete_director' director.id %}" class="btn btn-danger badge">Удалить фото</a> 
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>  
+  <p>Фамилия: {{ director_last_name }}</p>
+  <p>Имя: {{ director_first_name }}</p>
+  <p>Дата рождения: {{ director_data_of_birth }}</p>
+  {% if director_data_of_death %}
+    <p>Дата смерти: {{ director_data_of_death }}</p>
+  {% endif %}
+  <main class="container px-6 align-items-center">
+    <div class="row gx-5">
+      <div class="col-3 text-center align-items-center p-3 border bg-primary">
+        <p>
+          <a href="{% url 'cinema_site:edit_entry_director' director.id %}" class="btn btn-danger badge">Уточнить информацию о режиссере</a>  
+        </p>
+      </div>
+      <div class="col-6 text-center align-items-center p-3 border bg-primary">
+        <p>
+          <a href="{% url 'cinema_site:search_director_film' %}" class="btn btn-danger badge">Доополнить список фильмов/сериалов режиссера новым фильмом/сериалом</a>
+        </p>
+      </div>
+      <div class="col-3 text-center align-items-center p-3 border bg-primary">
+        <p>
+          <a href="{% url 'cinema_site:delete_director_page' director.id %}" class="btn btn-danger badge">Удалить страницу с режиссером</a>  
+        </p>
+      </div>
+    </div>
+  <p></p>  
+  <p>Список фильмов режиссера</p>
+  {% for film in films %}
+    <li>
+      <a href="{% url 'cinema_site:film' film.id %}">
+      {{ film.name }}</a>
+    </li>
+  {% empty %}
+    <li>Фильмы отсутствуют.</li>
+  {% endfor %}
+{% endblock content %}

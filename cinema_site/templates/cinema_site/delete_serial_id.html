@@ -1,0 +1,16 @@
+{% extends 'cinema_site/base.html' %}
+{% block content %}
+<h3>Удаление изображения</h3>
+<p>Вы действительно хотите удалить это изображение из сериала <strong>{{ image.films.name }}</strong>?</p>
+<img src="{{ image.image.url }}" alt="{{ image.name }}" width="300">
+<br><br>
+<form method="POST">
+  {% csrf_token %}
+  <div>
+    <button type="submit">Да, удалить</button>
+  </div>
+</form>
+<a href="{% url 'cinema_site:serial' serial.id %}">
+  ← Отмена, вернуться к странице с сериалом
+</a>
+{% endblock content %}

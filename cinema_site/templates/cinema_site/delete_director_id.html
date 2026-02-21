@@ -1,0 +1,16 @@
+{% extends 'cinema_site/base.html' %}
+{% block content %}
+<h3>Удаление изображения</h3>
+<p>Вы действительно хотите удалить фото режиссера <strong>{{ image.directors.last_name }} {{ image.directors.first_name }}</strong>?</p>
+<img src="{{ image.image.url }}" width="300">
+<br><br>
+<form method="POST">
+  {% csrf_token %}
+  <div>
+    <button type="submit">Да, удалить</button>
+  </div>
+</form>
+<a href="{% url 'cinema_site:delete_director' image.directors.id %}">
+  ← Отмена, вернуться к списку изображений
+</a>
+{% endblock content %}

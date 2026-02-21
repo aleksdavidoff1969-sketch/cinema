@@ -1,0 +1,10 @@
+{% extends "cinema_site/base.html" %}
+{% block content %}
+ <p><a href="{% url 'cinema_site:serial' serial.id %}">{{ serial }}</a></p>
+ <p>Сюжет сериала:</p>
+ <form action="{% url 'cinema_site:new_entry_serial' serial.id %}" method='post'>
+ {% csrf_token %}
+ {{ form.as_p }}
+ <button name='submit'>Добавить оценку и комментарии к сериалу</button>
+ </form>
+{% endblock content %}

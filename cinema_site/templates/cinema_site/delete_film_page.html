@@ -1,0 +1,16 @@
+{% extends 'cinema_site/base.html' %}
+{% block content %}
+<h3>Удаление страницы с режиссером</h3>
+<p>Вы действительно хотите удалить страницу с фильмом <strong>{{ film.name }}</strong>?</p>
+</a>
+<form method="POST">
+  {% csrf_token %}
+  <div>
+    <button type="submit">Да, удалить</button>
+  </div>
+</form>
+<br>
+<a href="{% url 'cinema_site:film' film.id %}">
+  ← Отмена, вернуться на страницу с фильмом
+</a>
+{% endblock content %}

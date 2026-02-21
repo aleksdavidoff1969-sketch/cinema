@@ -1,0 +1,6 @@
+{% extends "cinema_site/base.html" %}
+{% block content %}
+<p>Максимальное количество загружаемых изображений: 1</p>
+<p>Превышен лимит загруженных изображений</p>
+<p><a href="{% url 'cinema_site:director' director.id %}">Вернуться на страницу с режиссером {{ director.Last_name }} {{ director.first_name</a></p>
+{% endblock content %}

@@ -1,0 +1,114 @@
+{% extends 'cinema_site/base.html' %}
+{% block content %}
+  <p>Сериал: {{ serial_name }}</p>
+  <p>Жанр сериала: {{ serial_genre }}</p>
+  <p>Режиссер сериала: {{ serial_director }}</p>
+  <p>Страна производства: {{ serial_country_production }}</p>
+  <p>Год выпуска: {{ serial_year_of_release }}</p>
+  <p>Категория: {{ serial_film_serial }}</p>
+  <p>Рейтинг сериала: {{ raiting }}</p>
+
+  <!-- Кнопка-триггер модального окна -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Оценки и комментарии
+  </button>
+
+  <!-- Модальное окно -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Оценки и комментарии</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body">
+            <ul>
+              {% for sujget in sujgets %}
+                <li>
+                  <p>Дата: {{ sujget.date_added|date:'M d, Y H:i' }}</p>
+                  <p>Оценка по пятибальной шкале: {{ sujget.estimation|linebreaks }}</p>
+                  <p>Комментарии: {{ sujget.about_film|linebreaks }}</p>
+                </li>
+              {% empty %}
+                <li>
+                  Оценки отсутствуют
+                </li>
+              {% endfor %}
+            </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul>
+    <p></p>
+  <main class="container px-6 align-items-center">
+    <div class="row gx-5">
+      <div class="col-3 text-center align-items-center p-3 border bg-primary">
+        <p>
+          <a href="{% url 'cinema_site:add_serial_director' serial.id %}" class="btn btn-danger d-block mx-auto badge">Добавить/изменить режиссера сериала</a>  
+        </p>
+      </div>
+      <div class="col-3 text-center align-items-center p-3 border bg-primary">
+        <p>
+          <a href="{% url 'cinema_site:edit_entry_serial' serial.id %}" class="btn btn-danger badge">Уточнить информацию о сериале</a>
+        </p>
+      </div>
+      <div class="col-3 text-center align-items-center p-3 border bg-primary">
+        <p>
+          <a href="{% url 'cinema_site:new_entry_serial' serial.id %}" class="btn btn-danger badge">Добавить комментарий к сериалу</a>
+        </p>
+      </div>
+            <div class="col-3 text-center align-items-center p-3 border bg-primary">
+        <p>
+          <a href="{% url 'cinema_site:new_estimation_serial' serial.id %}" class="btn btn-danger badge">Добавить оценку сериалу</a>
+        </p>
+      </div>
+    </div>
+    <br>
+    <div class="row gx-5">
+            <div class="col-3 text-center align-items-center p-3 border bg-primary">
+        <p>
+          <a href="{% url 'cinema_site:new_image_serial' serial.id %}" class="btn btn-danger badge">Добавить кадр из сериала</a>
+        </p>
+      </div>
+      <div class="col-3 text-center align-items-center p-3 border bg-primary">
+        <p>
+          <a href="{% url 'cinema_site:delete_serial_page' serial.id %}" class="btn btn-danger badge">Удалить страницу с сериалом</a>  
+        </p>
+      </div>
+      <div class="col-3 text-center align-items-center p-3 border bg-primary">
+        <p>
+          <a href="{% url 'cinema_site:new_video_serial' serial.id %}" class="btn btn-danger badge">Добавить видео</a>  
+        </p>
+      </div>
+    </div>
+    <br>  
+  <main class="container">
+    <div class="row">
+      {% for im in image %}
+        <div class="col-4 p-3 border bg-primary">
+          <p>Изображение {{ forloop.counter }}</p>
+          <p ><img src="{{im.image.url}}" class="img-fluid"></p>
+          <a href="{% url 'cinema_site:delete_serial_id' im.id serial.id %}" class="btn btn-danger badge">Удалить изображение</a>  
+        </div>
+      {% endfor %}
+    </div>
+  </main>
+  <br>
+  <main class="container">
+    <div class="row">
+      {% for video in videos %}
+        <div class="col-4 text-center align-items-center p-3 border bg-primary">
+          <p>Видео {{ forloop.counter }}</p>
+          <video width="100%" controls> 
+            <source src="{{video.videos.url}}" type="video/mp4">
+          </video>
+          <a href="{% url 'cinema_site:delete_serial_video_id' video.id serial.id %}" class="btn btn-danger badge">Удалить видео</a>  
+        </div>
+      {% endfor %}
+    </div> 
+  </main>
+{% endblock content %}

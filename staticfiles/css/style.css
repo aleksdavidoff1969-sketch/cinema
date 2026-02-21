@@ -1,0 +1,40 @@
+
+.waviy {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.waviy span {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  animation: waviy 3s infinite;
+  animation-delay: calc(0.5s * var(--i));
+}
+
+@keyframes waviy {
+  0%, 40%, 100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-20px);
+    color: #007bff; /* Цвет при подъеме */
+  }
+}
+
+.animated-gradient-text {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #9900ff);
+            background-size: 400% 100%;
+                        -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientMove 3s ease infinite;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }

@@ -1,0 +1,10 @@
+{% extends "cinema_site/base.html" %}
+{% block content %}
+ <p><a href="{% url 'cinema_site:film' film.id %}">Вернуться на страницу с фильмом {{ film.name }}</a></p>
+ <p>Оценить фильм по пятибальной шкале:</p>
+ <form action="{% url 'cinema_site:new_estimation_film' film.id %}" method='post' enctype="multipart/form-data">
+ {% csrf_token %}
+ {{ form.as_p }}
+ <button name='submit'>Добавить оценку</button>
+ </form>
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends "cinema_site/base.html" %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+  {% if query %}
+    <h2>Поиск фильма: {{ query }}</h2>
+    <h4>
+      {% with results.count as total_results %}
+	    Найдено: {{ total_results }} result {{ total_results|pluralize }}
+      {% endwith %}
+    </h4>
+    {% for film in results %}
+      <h5><a href="{% url 'cinema_site:film' film.id %}">{{ film.name }}</a></h5>
+    {% empty %}
+      <p>Фильм с таким названием не найден</p>
+    {% endfor %}
+    <p><a href="{% url "cinema_site:post_search_film" %}">Искать заново</a></p>
+  {% else %}
+    <h2>Введите название фильма</h2>
+    <form action="." method="get">
+      {{ form.as_p }}
+      <input type="submit" value="Искать">
+    </form>
+  {% endif %}
+{% endblock %}

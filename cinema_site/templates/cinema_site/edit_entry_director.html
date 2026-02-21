@@ -1,0 +1,10 @@
+{% extends 'cinema_site/base.html' %}
+{% block content %}
+  <p><a href="{% url 'cinema_site:director' director.id %}">{{ director.last_name }} {{ director.first_name }}</a></p>
+  <p>Уточнить информацию о режиссере:</p>
+  <form action="{% url 'cinema_site:edit_entry_director' director.id %}" method='post'>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button name='submit'>Уточнить информацию</button>
+  </form>
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% extends 'cinema_site/base.html' %}
+{% block content %}
+{% for im in images %}
+  <p>
+    <img src="{{ im.image.url }}" width="200">
+    <br>
+    <!-- Передаём и image.id, и director.id -->
+    <a href="{% url 'cinema_site:delete_director_id' im.id director.id %}">
+      Удалить изображение
+    </a>
+  </p>
+{% endfor %}
+<a href="{% url 'cinema_site:director' director.id %}">Вернуться на страницу с режиссером</a>
+{% endblock content %}

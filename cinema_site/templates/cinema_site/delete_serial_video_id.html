@@ -1,0 +1,25 @@
+{% extends 'cinema_site/base.html' %}
+{% block content %}
+<h3>Удаление видео</h3>
+<p>Вы действительно хотите удалить это видео из сериала <strong>{{ video.films.name }}</strong>?</p>
+    <main class="container">
+      <div class="row">
+          <div class="col-4 text-center align-items-center p-3 border bg-primary">
+            <video width="100%" controls> 
+              <source src="{{video.videos.url}}" type="video/mp4">
+            </video>  
+          </div>
+      </div> 
+    </main>
+<br><br>
+<form method="POST">
+  {% csrf_token %}
+  <div>
+    <button type="submit">Да, удалить</button>
+  </div>
+</form>
+<br>
+<a href="{% url 'cinema_site:serial' serial.id %}">
+  ← Отмена, вернуться к странице с сериалом
+</a>
+{% endblock content %}

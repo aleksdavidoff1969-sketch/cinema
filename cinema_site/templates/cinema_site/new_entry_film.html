@@ -1,0 +1,10 @@
+{% extends "cinema_site/base.html" %}
+{% block content %}
+ <p><a href="{% url 'cinema_site:film' film.id %}">{{ film.name }}</a></p>
+ <p>Добавить комментарий к фильму:</p>
+ <form action="{% url 'cinema_site:new_entry_film' film.id %}" method='post' enctype="multipart/form-data">
+ {% csrf_token %}
+ {{ form.as_p }}
+ <button name='submit'>Добавить комментарий</button>
+ </form>
+{% endblock content %}

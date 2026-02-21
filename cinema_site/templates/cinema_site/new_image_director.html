@@ -1,0 +1,11 @@
+{% extends "cinema_site/base.html" %}
+{% block content %}
+ <p><a href="{% url 'cinema_site:director' director.id %}">{{ director.last_name }} {{ director.first_name}}</a></p>
+ <p>Максимальное количество фото режиссера: 1</p>
+  <p>Добавьте фото режиссера:</p>
+ <form action="{% url 'cinema_site:new_image_director' director.id %}" method='post' enctype="multipart/form-data">
+ {% csrf_token %}
+ {{ form.as_p }}
+ <button name='submit'>Добавить фото</button>
+ </form>
+{% endblock content %}

@@ -1,0 +1,6 @@
+{% extends "cinema_site/base.html" %}
+{% block content %}
+<p>Максимальное количество загружаемых видео: 2</p>
+<p>Превышен лимит загруженных видео</p>
+<p><a href="{% url 'cinema_site:film' film.id %}">Вернуться на страницу с фильмом {{ film.name }}</a></p>
+{% endblock content %}
