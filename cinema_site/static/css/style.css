@@ -38,3 +38,44 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+.rainbow > * {
+  position: relative;
+  z-index: 2;
+  color: black; /* Для читаемости текста */
+}
+.rainbow {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent !important;
+}
+
+.rainbow::before {
+  /* ... */
+  background: conic-gradient(
+    from 0deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet,
+    red
+  );
+  /* ... */
+}
+
+
+.rainbow::after {
+  background: transparent; /* Прозрачный фон */
+  border: 2px solid white; /* Или другой цвет */
+  box-shadow: inset 0 0 0 2px white; /* Альтернатива */
+}
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
