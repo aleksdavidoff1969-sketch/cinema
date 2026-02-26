@@ -1,0 +1,60 @@
+.rainbow > * {
+  position: relative;
+  z-index: 2;
+  color: black;
+}
+
+.rainbow {
+  position: relative;
+  width: 25%;
+  height: auto; /* Занимает всю высоту родителя */
+  min-height: 100px; /* Минимальная высота как у других рамок */
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent !important;
+  /* Добавляем отступы как у других рамок */
+  padding: 1rem !important; /* Переопределяем p-3 из Bootstrap */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rainbow::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: conic-gradient(
+    from 0deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet,
+    red
+  );
+  animation: rotate 4s linear infinite;
+  z-index: 0;
+}
+
+.rainbow::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  background: #0d6efd; /* Тот же цвет что и bg-primary (синий Bootstrap) */
+  border-radius: 9px;
+  z-index: 1;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
