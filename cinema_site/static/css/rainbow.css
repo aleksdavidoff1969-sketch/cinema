@@ -1,3 +1,4 @@
+/* Основные стили */
 .rainbow > * {
   position: relative;
   z-index: 2;
@@ -6,19 +7,44 @@
 
 .rainbow {
   position: relative;
-  width: 25%;
-  height: auto; /* Занимает всю высоту родителя */
-  min-height: 100px; /* Минимальная высота как у других рамок */
+  width: 100%; /* Важно: 100% от родительской колонки */
+  height: 100%; /* Растягивается на всю высоту родителя */
+  min-height: 120px;
   border-radius: 12px;
   overflow: hidden;
   background: transparent !important;
-  /* Добавляем отступы как у других рамок */
-  padding: 1rem !important; /* Переопределяем p-3 из Bootstrap */
+  padding: 1rem !important;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0; /* Убираем возможные отступы */
 }
 
+/* Убедимся, что родительская колонка тоже растягивается */
+.row > [class*="col-"] {
+  display: flex; /* Делаем колонку flex-контейнером */
+}
+
+
+
+/* Дополнительные стили для лучшей адаптивности */
+.rainbow {
+  /* Убедимся, что рамка растягивается */
+  flex: 1 1 auto;
+}
+
+/* Для родительского контейнера */
+.row {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.row > [class*="col-"] {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* Радужный фон */
 .rainbow::before {
   content: "";
   position: absolute;
@@ -48,9 +74,106 @@
   left: 3px;
   right: 3px;
   bottom: 3px;
-  background: #0d6efd; /* Тот же цвет что и bg-primary (синий Bootstrap) */
+  background: #0d6efd;
   border-radius: 9px;
   z-index: 1;
+}
+
+/* Fluid кнопки внутри рамок */
+.rainbow .btn {
+  width: 100%;
+  height: 100%;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: normal;
+  word-break: break-word;
+  padding: 12px 10px;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  z-index: 3;
+  position: relative;
+  background-color: #dc3545; /* Красный цвет для btn-danger */
+  border-radius: 8px;
+}
+
+/* Эффект при наведении */
+.rainbow .btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  border-color: white;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 576px) {
+  .rainbow {
+    min-height: 100px;
+  }
+  
+  .rainbow .btn {
+    min-height: 60px;
+    font-size: 0.9rem;
+    padding: 8px 6px;
+  }
+}
+
+/* Для планшетов */
+@media (min-width: 577px) and (max-width: 991px) {
+  .rainbow {
+    min-height: 110px;
+  }
+  
+  .rainbow .btn {
+    min-height: 70px;
+    font-size: 1rem;
+    padding: 10px 8px;
+  }
+}
+
+/* Для десктопов */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .rainbow {
+    min-height: 130px;
+  }
+  
+  .rainbow .btn {
+    min-height: 85px;
+    font-size: 1.1rem;
+    padding: 15px 12px;
+  }
+}
+
+/* Для больших десктопов */
+@media (min-width: 1000px) {
+  .rainbow {
+    min-height: 160px;
+    padding: 1rem !important;
+  }
+  
+  .rainbow .btn {
+    min-height: 100px;
+    font-size: 1.2rem;
+    padding: 18px 15px;
+  }
+}
+
+/* Для очень больших экранов */
+@media (min-width: 1600px) {
+  .rainbow {
+    min-height: 200px;
+    padding: 1.5rem !important;
+  }
+  
+  .rainbow .btn {
+    min-height: 130px;
+    font-size: 1.4rem;
+    padding: 22px 20px;
+  }
 }
 
 @keyframes rotate {
