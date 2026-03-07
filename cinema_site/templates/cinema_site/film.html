@@ -2,7 +2,6 @@
 {% load static %}
 {% block content %}
 <head>
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap/min/css" rel="stylesheet">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
  <link rel="stylesheet" href="{% static 'css/rainbow.css' %}">
 </head>
@@ -47,78 +46,104 @@
       </div>
     </div>
   </div>
-  <p></p>
-  <main class="container px-6 align-items-center">
-    <div class="row gx-5">
-      <div class="col-3 rainbow text-center align-items-center p-3 border">
-        <p>
+<br>
+
+<!-- Кнопки действий -->
+  <main class="container mt-4">
+    <div class="row gx-3">
+      <!-- Добавляем класс d-flex к колонкам -->
+      <div class="col-12 col-sm-6 col-lg-3 d-flex">
+        <div class="rainbow text-center p-4 border rounded w-100"> <!-- w-100 для ширины -->
           <a href="{% url 'cinema_site:add_film_director' film.id %}" class="btn btn-danger d-block mx-auto badge">Добавить/изменить режиссера фильма</a>  
-        </p>
+        </div>
       </div>
-      <div class="col-3 rainbow text-center align-items-center p-3 border">
-        <p>
+
+      <div class="col-12 col-sm-6 col-lg-3 d-flex">
+        <div class="rainbow text-center p-4 border rounded w-100">>
           <a href="{% url 'cinema_site:edit_entry_film' film.id %}" class="btn btn-danger badge">Уточнить информацию о фильме</a>
-        </p>
+        </div>
       </div>
-      <div class="col-3 rainbow text-center align-items-center p-3 border">
-        <p>
+
+      <div class="col-12 col-sm-6 col-lg-3 d-flex">
+        <div class="rainbow text-center p-4 border rounded w-100">
           <a href="{% url 'cinema_site:new_entry_film' film.id %}" class="btn btn-danger badge">Добавить комментарий к фильму</a>
-        </p>
+        </div>
       </div>
-      <div class="col-3 rainbow text-center align-items-center p-3 border">
-        <p>
+
+      <div class="col-12 col-sm-6 col-lg-3 d-flex">
+        <div class="rainbow text-center p-4 border rounded w-100">
           <a href="{% url 'cinema_site:new_estimation_film' film.id %}" class="btn btn-danger badge">Добавить оценку фильму</a>
-        </p>
+        </div>
       </div>
     </div>
+
     <br>
-    <div class="row gx-5">
-            <div class="col-3 rainbow text-center align-items-center p-3 border">
-        <p>
+    <div class="row gx-3">
+      <div class="col-12 col-sm-6 col-lg-3 d-flex">
+        <div class="rainbow text-center p-4 border rounded w-100">
           <a href="{% url 'cinema_site:new_image_film' film.id %}" class="btn btn-danger badge">Добавить кадр из фильма</a>
-        </p>
+        </div>
       </div>
-      <div class="col-3 rainbow text-center align-items-center p-3 border">
-        <p>
+
+      <div class="col-12 col-sm-6 col-lg-3 d-flex">
+        <div class="rainbow text-center p-4 border rounded w-100">
           <a href="{% url 'cinema_site:delete_film_page' film.id %}" class="btn btn-danger badge">Удалить страницу с фильмом</a>  
-        </p>
+        </div>
       </div>
-      <div class="col-3 rainbow text-center align-items-center p-3 border">
-        <p>
+      
+      <div class="col-12 col-sm-6 col-lg-3 d-flex">
+        <div class="rainbow text-center p-4 border rounded w-100">
           <a href="{% url 'cinema_site:new_video_film' film.id %}" class="btn btn-danger badge">Добавить видео</a>  
-        </p>
+        </div>
       </div>
     </div>
+  </main>
     <br>
-    <main class="container">
-      <div class="row">
+
+    <!-- Изображения -->
+    <main class="container mt-4">
+      <div class="row gx-3">
         {% for im in image %}
           {% if im.image %}
           <div class="col-4 text-center align-items-center p-3 border bg-primary">
             <div class="animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0|add:1 }}s;">
             <p>Изображение {{ forloop.counter }}</p>
-            <p ><img src="{{im.image.url}}" class="img-fluid"></p>
+            <img src="{{im.image.url}}" class="img-fluid">
             <a href="{% url 'cinema_site:delete_film_id' im.id film.id %}" class="btn btn-danger badge">Удалить изображение</a>
-            {% else %}
+          {% else %}
             <img src="/media/images/default-image.jpg" alt="Изображения отсутствуют">
-            {% endif %}  
+          {% endif %}  
             </div>
           </div>
         {% endfor %}
       </div>
     </main>
     <br>
-    <main class="container">
-      <div class="row">
-        {% for video in videos %}
-          <div class="col-4 text-center align-items-center p-3 border bg-primary">
-            <p>Видео {{ forloop.counter }}</p>
-            <video width="100%" controls> 
-              <source src="{{video.videos.url}}" type="video/mp4">
-            </video>
-            <a href="{% url 'cinema_site:delete_film_video_id' video.id film.id %}" class="btn btn-danger badge">Удалить видео</a>  
+
+<!-- Видео - простой вариант -->
+<main class="container mt-4">
+  <div class="row g-3">
+    {% for video in videos %}
+      <div class="col -12 col-md-4 text-center align-items-center p-3 border bg-primary">
+        <div class="animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0|add:1 }}s;">
+            <p class="card-title fw-bold">Видео {{ forloop.counter }}</p>
+            
+            <!-- Видео с ограничением по высоте -->
+            <div class="d-flex justify-content-center align-items-center bg-dark rounded overflow-hidden mb-2" 
+           style="height: 180px; width: 100%;">
+              <video style="width: 100%; height: 100%; object-fit: contain;" controls>
+                <source src="{{ video.videos.url }}" type="video/mp4">
+              </video>
+            </div>
+            
+            <a href="{% url 'cinema_site:delete_film_video_id' video.id film.id %}" 
+               class="btn btn-danger btn-sm w-100">
+               Удалить видео
+            </a>
           </div>
-        {% endfor %}
-      </div> 
-    </main>
+        </div>
+      </div>
+    {% endfor %}
+  </div> 
+</main>
 {% endblock content %}

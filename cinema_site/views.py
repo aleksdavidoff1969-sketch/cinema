@@ -211,7 +211,9 @@ def new_serial(request):
         # Отправлены данные POST; обработать данные.
         form = FilmsForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            new_serial=form.save(commit=False)
+            new_serial.owner=request.user
+            new_serial.save()
             return redirect('cinema_site:serials')
     # Вывести пустую или недействительную форму.
     context = {'form': form}
