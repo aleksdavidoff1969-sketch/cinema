@@ -48,7 +48,7 @@
     <span style="--i:17">В</span>
   </div>
   {% for director in directors %}
-    <div class="animate__animated animate__fadeInUp" style="animation-delay: {{forloop.counter}}s;">
+    <div class="col-6 col-md-4 animate__animated animate__fadeInUp" style="animation-delay: {{forloop.counter}}s;">
     <li>
       <a href="{% url 'cinema_site:director' director.id %}">
       {{ director.last_name }} {{ director.first_name}}, информация о режиссере</a>

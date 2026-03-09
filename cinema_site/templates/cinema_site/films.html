@@ -80,7 +80,7 @@
   <main class="container ps-0 mx-2">
     <div class="row">
     {% for film in films %}
-      <div class="col-2 text-center align-items-center p-3 border bg-primary">
+      <div class="col-6 col-md-4 text-center align-items-center p-3 border bg-primary">
         <div class="animate__animated animate__fadeInUp" style="animation-delay: {{forloop.counter}}s;">
           <a href="{% url 'cinema_site:film' film.id %}" class="btn btn-danger badge">{{ film.name }}</a>
         </div>

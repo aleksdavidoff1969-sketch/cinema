@@ -35,7 +35,7 @@ X_FRAME_OPTIONS = 'DENY'
 CSRF_COOKIE_SECURE = True  # True для HTTPS
 SESSION_COOKIE_SECURE = True  # True для HTTPS
 
-ALLOWED_HOSTS = [ ]
+ALLOWED_HOSTS = []
 
 
 # Application definition
