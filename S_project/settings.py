@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b&)l0g*n-pl8z&4+s+c$a$-i-p9w06u@qia&7%a#-izq9td#o&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -35,7 +35,7 @@ X_FRAME_OPTIONS = 'DENY'
 CSRF_COOKIE_SECURE = True  # True для HTTPS
 SESSION_COOKIE_SECURE = True  # True для HTTPS
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aleksdavidoff/pythonanywhere.com']
 
 
 # Application definition

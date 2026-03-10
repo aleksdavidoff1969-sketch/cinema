@@ -5,7 +5,7 @@
   <h5>Информация о режиссере</h5>
   <main class="container px-6 align-items-center"></main>
     <div class="row gx-5">
-      <div class="col-4 text-center align-items-center p-3 border bg-primary">
+      <div class="col-6 col-md-4 text-center align-items-center p-3 border bg-primary">
         {% if not image %}
           <a href="{% url 'cinema_site:new_image_director' director.id %}" class="btn btn-danger badge">Добавить фото режиссера</a>
         {% else %} 

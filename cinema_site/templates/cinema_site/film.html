@@ -105,7 +105,7 @@
       <div class="row gx-3">
         {% for im in image %}
           {% if im.image %}
-          <div class="col-4 text-center align-items-center p-3 border bg-primary">
+          <div class="col-6 col-md-4 text-center align-items-center p-3 border bg-primary">
             <div class="animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0|add:1 }}s;">
             <p>Изображение {{ forloop.counter }}</p>
             <img src="{{im.image.url}}" class="img-fluid">
